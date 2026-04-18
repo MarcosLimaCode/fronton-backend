@@ -1,0 +1,49 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id          Int         @id @default(autoincrement())
+  deviceToken String      @unique
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+
+  preferences Preference?
+
+  @@map("users")
+}
+
+model Preference {
+  id               Int      @id @default(autoincrement())
+  politics         Boolean  @default(true)
+  sensitiveContent Boolean  @default(false)
+  popCulture       Boolean  @default(true)
+  football         Boolean  @default(true)
+  economy          Boolean  @default(true)
+  updatedAt        DateTime @updatedAt
+
+  userId Int  @unique
+  user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("preferences")
+}
+
+model News {
+  id          Int      @id @default(autoincrement())
+  title       String
+  portal      String
+  imageUrl    String?
+  content     String
+  link        String   @unique
+  publishedAt DateTime
+  createdAt   DateTime @default(now())
+
+  @@map("news")
+}
