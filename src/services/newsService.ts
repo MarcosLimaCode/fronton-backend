@@ -13,36 +13,52 @@ export async function createNewsService(source: {
   url: string;
   portal: string;
 }) {
-  const feed = await parser.parseURL(source.url);
+  try {
+    const response = await fetch(source.url);
+    const rawBody = await response.text();
+    const cleanXml = rawBody.substring(rawBody.indexOf("<")).trim();
 
-  for (const item of feed.items) {
-    let imageUrl =
-      extractImageFromContent(item["content:encoded"] || item.content || "") ||
-      item.enclosure?.url ||
-      item.image?.url ||
-      "";
-    if (!imageUrl) continue;
-    if (imageUrl.includes("emoji")) continue;
+    // 3. Agora usamos parseString em vez de parseURL
+    const feed = await parser.parseString(cleanXml);
 
-    const newsObj: CreateNewsData = {
-      title: item.title,
-      portal: source.portal,
-      imageUrl: imageUrl,
-      content: item.content,
-      link: item.link,
-      publishedAt: new Date(item.pubDate ?? Date.now()),
-    };
-    await createNewsRepository(newsObj);
+    for (const item of feed.items) {
+      let imageUrl =
+        extractImageFromContent(
+          item["content:encoded"] || item.content || ""
+        ) ||
+        item.enclosure?.url ||
+        item.image?.url ||
+        "";
+
+      if (!imageUrl || !item.title || !item.content || !item.link) continue;
+      if (imageUrl.includes("emoji")) continue;
+
+      const newsObj: CreateNewsData = {
+        title: item.title,
+        portal: source.portal,
+        imageUrl: imageUrl,
+        content: item.content,
+        link: item.link,
+        publishedAt: new Date(item.pubDate ?? Date.now()),
+      };
+
+      await createNewsRepository(newsObj);
+    }
+  } catch (error) {
+    console.error(
+      `[RSS ERROR] Falha ao processar ${source.portal}:`,
+      error.message
+    );
   }
   return;
 }
 
 export async function refreshNewsService() {
-  await Promise.all(
-    RSS_FEEDS.map((source) => {
-      createNewsService(source);
-    })
+  await Promise.allSettled(
+    RSS_FEEDS.map((source) => createNewsService(source))
   );
+
+  console.log("--- Refresh de notícias finalizado ---");
   return;
 }
 

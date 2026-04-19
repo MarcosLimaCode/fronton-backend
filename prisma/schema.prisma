@@ -41,7 +41,7 @@ model News {
   portal      String
   imageUrl    String?
   content     String
-  link        String  
+  link        String   @unique
   publishedAt DateTime
   createdAt   DateTime @default(now())
 
