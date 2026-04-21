@@ -26,7 +26,7 @@ export async function createNewsService(source: {
     const feed = await parser.parseURL(source.url);
 
     for (const item of feed.items) {
-      let newLink = extractOriginalLink(item.content);
+      let newLink = extractOriginalLink(item.content || "");
       let imageUrl = extractImageFromContent(item.content || "");
       let removeLink = removeLinkFromTitle(item.title || "");
       let newTitle = truncateTitle(removeLink || "");
@@ -47,10 +47,13 @@ export async function createNewsService(source: {
       await createNewsRepository(newsObj);
     }
   } catch (error) {
-    console.error(
-      `[RSS ERROR] Falha ao processar ${source.portal}:`,
-      error.message
-    );
+    if (error instanceof Error) {
+      console.error(
+        `[RSS ERROR] Falha ao processar ${source.portal}:`,
+        error.message
+      );
+    }
+  
   }
   return;
 }
