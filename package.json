@@ -3,10 +3,15 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "dev": "ts-node-dev src/server.ts",
     "build": "tsc",
-    "start": "node dist/server.js",
-    "prisma:studio": "prisma studio"
+    "start": "npm run migration:run && npm run seed && node dist/src/server.js",
+    "dev": "ts-node-dev src/server.ts",
+    "migration:run": "prisma migrate deploy",
+    "test": "dotenv -e .env.test prisma migrate deploy & dotenv -e .env.test jest -- --runInBand",
+    "test:coverage": "npm run test -- --coverage",
+    "lint": "eslint .",
+    "precommit": "lint-staged",
+    "prepare": "husky"
   },
   "keywords": [],
   "author": "",
