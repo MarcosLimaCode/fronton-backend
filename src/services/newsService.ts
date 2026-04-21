@@ -26,10 +26,10 @@ export async function createNewsService(source: {
     const feed = await parser.parseURL(source.url);
 
     for (const item of feed.items) {
-      let newLink = extractOriginalLink(item.content || "");
       let imageUrl = extractImageFromContent(item.content || "");
       let removeLink = removeLinkFromTitle(item.title || "");
       let newTitle = truncateTitle(removeLink || "");
+      let newLink = extractOriginalLink(item.content || "");
 
       if (!imageUrl || !newLink) continue;
       if (newTitle.includes("#")) continue;
