@@ -2,10 +2,10 @@
   "compilerOptions": {
     "outDir": "dist",
     "esModuleInterop": true,
+    "target": "ES2020",
     "module": "CommonJS",
     "moduleResolution": "Node",
-    "baseUrl": "src",
-    "ignoreDeprecations": "6.0"
+    "baseUrl": "src"
   },
   "ts-node": {
     "esm": true
