@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { getNewsService, refreshNewsService } from "services/newsService";
+import { getNewsService, refreshNewsService } from "../services/newsService.js";
 
 export async function getNews(req: Request, res: Response) {
   const result = await getNewsService();

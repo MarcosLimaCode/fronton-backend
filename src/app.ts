@@ -1,6 +1,6 @@
 import express, { json } from "express";
 import dotenv from "dotenv";
-import router from "routers/newsRouter";
+import router from "./routers/newsRouter.js";
 import cors from "cors"; 
 
 dotenv.config();

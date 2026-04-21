@@ -1,5 +1,5 @@
-import prisma from "database/database";
-import { CreateNewsData } from "protocols/newsProtocol";
+import prisma from "../database/database.js";
+import { CreateNewsData } from "../protocols/newsProtocol.js";
 
 export async function createNewsRepository(data: CreateNewsData) {
   const result = await prisma.news.upsert({

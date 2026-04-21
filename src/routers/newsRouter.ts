@@ -1,4 +1,4 @@
-import { createNews, getNews } from "controllers/newsController";
+import { createNews, getNews } from "../controllers/newsController.js";
 import { Router } from "express";
 
 const router = Router();

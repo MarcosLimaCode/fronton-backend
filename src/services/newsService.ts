@@ -1,17 +1,17 @@
 import Parser from "rss-parser";
-import { RSS_FEEDS } from "../config/rssFeeds";
+import { RSS_FEEDS } from "../config/rssFeeds.js";
 import {
   createNewsRepository,
   getNewsRepository,
-} from "repositories/newsRepository";
-import { CreateNewsData } from "protocols/newsProtocol";
+} from "../repositories/newsRepository.js";
+import { CreateNewsData } from "../protocols/newsProtocol.js";
 import {
   extractImageFromContent,
   extractOriginalLink,
   formatPubDate,
   removeLinkFromTitle,
   truncateTitle,
-} from "../utils/extractInfo";
+} from "../utils/extractInfo.js";
 
 const parser = new Parser();
 
