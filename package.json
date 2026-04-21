@@ -4,9 +4,9 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "build": "npm install && npm run build",
-    "start": "node dist/server.js",
-    "dev": "ts-node-dev src/server.ts",
+    "build": "rm -rf dist && tsc",
+    "start": "node dist/src/server.js",
+    "dev": "ts-node-dev --respawn --transpile-only src/server.ts",
     "migration:run": "prisma migrate deploy",
     "test": "dotenv -e .env.test prisma migrate deploy & dotenv -e .env.test jest -- --runInBand",
     "test:coverage": "npm run test -- --coverage",
