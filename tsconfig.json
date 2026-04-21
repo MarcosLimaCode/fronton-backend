@@ -5,7 +5,8 @@
     "target": "ES2020",
     "module": "esnext",
     "moduleResolution": "bundler",
-    "baseUrl": "src"
+    "baseUrl": "src",
+    "ignoreDeprecations": "6.0"
   },
   "ts-node": {
     "esm": true
