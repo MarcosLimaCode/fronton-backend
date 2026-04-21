@@ -5,41 +5,43 @@ import {
   getNewsRepository,
 } from "repositories/newsRepository";
 import { CreateNewsData } from "protocols/newsProtocol";
-import { extractImageFromContent } from "../utils/extractImage";
+import {
+  extractImageFromContent,
+  extractOriginalLink,
+  formatPubDate,
+  removeLinkFromTitle,
+  truncateTitle,
+} from "../utils/extractInfo";
 
 const parser = new Parser();
 
 export async function createNewsService(source: {
-  url: string;
   portal: string;
+  handle: string;
+  category: string;
+  url: string;
+  logo: string;
 }) {
   try {
-    const response = await fetch(source.url);
-    const rawBody = await response.text();
-    const cleanXml = rawBody.substring(rawBody.indexOf("<")).trim();
-
-    // 3. Agora usamos parseString em vez de parseURL
-    const feed = await parser.parseString(cleanXml);
+    const feed = await parser.parseURL(source.url);
 
     for (const item of feed.items) {
-      let imageUrl =
-        extractImageFromContent(
-          item["content:encoded"] || item.content || ""
-        ) ||
-        item.enclosure?.url ||
-        item.image?.url ||
-        "";
+      let newLink = extractOriginalLink(item.content);
+      let imageUrl = extractImageFromContent(item.content || "");
+      let removeLink = removeLinkFromTitle(item.title || "");
+      let newTitle = truncateTitle(removeLink || "");
 
-      if (!imageUrl || !item.title || !item.content || !item.link) continue;
-      if (imageUrl.includes("emoji")) continue;
+      if (!imageUrl || !newLink) continue;
+      if (newTitle.includes("#")) continue;
 
       const newsObj: CreateNewsData = {
-        title: item.title,
+        title: newTitle,
         portal: source.portal,
+        logo: source.logo,
         imageUrl: imageUrl,
-        content: item.content,
-        link: item.link,
-        publishedAt: new Date(item.pubDate ?? Date.now()),
+        content: item.title,
+        link: newLink,
+        publishedAt: new Date(item.isoDate ?? item.pubDate ?? Date.now()),
       };
 
       await createNewsRepository(newsObj);

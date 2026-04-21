@@ -39,6 +39,7 @@ model News {
   id          Int      @id @default(autoincrement())
   title       String
   portal      String
+  logo        String?
   imageUrl    String?
   content     String
   link        String   @unique

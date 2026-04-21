@@ -8,33 +8,20 @@ export async function createNewsRepository(data: CreateNewsData) {
     create: {
       title: data.title,
       portal: data.portal,
+      logo: data.logo,
       imageUrl: data.imageUrl,
       content: data.content,
       link: data.link,
-      publishedAt: new Date(),
+      publishedAt: new Date(data.publishedAt),
     },
   });
   return result;
 }
 
 export async function getNewsRepository() {
-  const twentyMinutesAgo = new Date(Date.now() - 20 * 60 * 1000);
-
-  const recentNews = await prisma.news.findMany({
-    where: {
-      publishedAt: {
-        gte: twentyMinutesAgo,
-      },
-    },
+  const fallbackNews = await prisma.news.findMany({
+    orderBy: { publishedAt: "desc" },
+    take: 100,
   });
-
-  if (recentNews.length === 0) {
-    const fallbackNews = await prisma.news.findMany({
-      orderBy: { publishedAt: "desc" },
-      take: 20,
-    });
-    return fallbackNews.sort(() => Math.random() - 0.5).slice(0, 8);
-  }
-
-  return recentNews.sort(() => Math.random() - 0.5).slice(0, 8);
+  return fallbackNews;
 }
