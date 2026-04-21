@@ -5,7 +5,7 @@
     "module": "CommonJS",
     "moduleResolution": "Node",
     "baseUrl": "src",
-    "ignoreDeprecations": "5.0"
+    "ignoreDeprecations": "6.0"
   },
   "ts-node": {
     "esm": true
