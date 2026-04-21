@@ -29,7 +29,7 @@ export async function createNewsService(source: {
       let imageUrl = extractImageFromContent(item.content || "");
       let removeLink = removeLinkFromTitle(item.title || "");
       let newTitle = truncateTitle(removeLink || "");
-      let newLink = extractOriginalLink(item.content);
+      let newLink = extractOriginalLink(item.content || "");
 
       if (!imageUrl || !newLink) continue;
       if (newTitle.includes("#")) continue;
@@ -39,7 +39,7 @@ export async function createNewsService(source: {
         portal: source.portal,
         logo: source.logo,
         imageUrl: imageUrl,
-        content: item.title,
+        content: item.title || "",
         link: newLink as string,
         publishedAt: new Date(item.isoDate ?? item.pubDate ?? Date.now()),
       };
