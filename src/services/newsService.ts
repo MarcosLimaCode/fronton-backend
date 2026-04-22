@@ -33,6 +33,9 @@ export async function createNewsService(source: {
 
       if (!imageUrl || !newLink) continue;
       if (newTitle.includes("#")) continue;
+      if (newTitle.includes("RT by @CNNBrasil")) continue;
+      if (newLink.includes("nitter")) continue;
+
 
       const newsObj: CreateNewsData = {
         title: newTitle,

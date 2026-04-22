@@ -14,8 +14,8 @@ export function extractOriginalLink(content: string): string | null {
 
 export function truncateTitle(title: string): string {
   const words = title.split(" ");
-  if (words.length <= 15) return title;
-  return words.slice(0, 12).join(" ") + "...";
+  if (words.length <= 20) return title;
+  return words.slice(0, 12).join(" ") + "... Ler mais";
 }
 
 export function formatPubDate(pubDate: string): string {

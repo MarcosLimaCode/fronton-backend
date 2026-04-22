@@ -42,13 +42,6 @@ export const RSS_FEEDS = [
     logo: "https://www.google.com/s2/favicons?domain=omelete.com.br&sz=64",
   },
   {
-    portal: "Globo Esporte",
-    handle: "geglobo",
-    category: "esportes",
-    url: "https://nitter.net/geglobo/rss",
-    logo: "https://www.google.com/s2/favicons?domain=ge.globo.com&sz=64",
-  },
-  {
     portal: "Rolling Stone Brasil",
     handle: "rollingstonebr",
     category: "música",
