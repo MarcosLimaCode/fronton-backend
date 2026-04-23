@@ -6,7 +6,10 @@ import {
   getNewsRepository,
 } from "../repositories/newsRepository.js";
 import { CreateNewsData, Preview } from "../protocols/newsProtocol.js";
-import { extractOriginalLink } from "../utils/extractInfo.js";
+import {
+  extractImageFromContent,
+  extractOriginalLink,
+} from "../utils/extractInfo.js";
 
 const parser = new Parser({
   headers: {
@@ -30,28 +33,21 @@ export async function createNewsService(
     console.log(`[RSS OK] ${source.portal} - ${feed.items.length} itens`);
 
     for (const item of feed.items.slice(0, maxNews)) {
-      const newLink = extractOriginalLink(item.content || "");
+      const newLink = item.link || extractOriginalLink(item.content || "");
       if (!newLink) continue;
-      console.log(`[PREVIEW] Buscando preview de: ${newLink}`);
-      const newData = (await getLinkPreview(newLink, {
-        followRedirects: "follow",
-        headers: {
-          "user-agent":
-            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
-        },
-        timeout: 5000,
-      })) as Preview;
-      console.log(`[PREVIEW OK] ${newLink}`);
 
-      if (!newData.images[0]) continue;
+      const imageUrl = extractImageFromContent(
+        item["content:encoded"] || item.content || ""
+      );
+      if (!imageUrl) continue; // pula se não tiver imagem no RSS
 
       const newsObj: CreateNewsData = {
-        title: newData.title,
+        title: item.title || "",
         portal: source.portal,
         logo: source.logo,
-        imageUrl: newData.images[0],
-        content: newData.description || "",
-        link: newData.url as string,
+        imageUrl,
+        content: "",
+        link: newLink,
         publishedAt: new Date(item.isoDate ?? item.pubDate ?? Date.now()),
       };
 
