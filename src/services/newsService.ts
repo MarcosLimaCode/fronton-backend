@@ -27,19 +27,21 @@ export async function createNewsService(
 ) {
   try {
     const feed = await parser.parseURL(source.url);
+    console.log(`[RSS OK] ${source.portal} - ${feed.items.length} itens`);
 
     for (const item of feed.items.slice(0, maxNews)) {
       const newLink = extractOriginalLink(item.content || "");
       if (!newLink) continue;
-
+      console.log(`[PREVIEW] Buscando preview de: ${newLink}`);
       const newData = (await getLinkPreview(newLink, {
         followRedirects: "follow",
         headers: {
           "user-agent":
             "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
         },
-        timeout: 10000,
+        timeout: 5000,
       })) as Preview;
+      console.log(`[PREVIEW OK] ${newLink}`);
 
       if (!newData.images[0]) continue;
 
@@ -55,7 +57,6 @@ export async function createNewsService(
 
       await createNewsRepository(newsObj);
       await new Promise((resolve) => setTimeout(resolve, 2000));
-
     }
   } catch (error) {
     if (error instanceof Error) {
