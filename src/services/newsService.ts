@@ -30,12 +30,10 @@ export async function createNewsService(
       const newLink = extractOriginalLink(item.content || "");
       if (!newLink) continue;
 
-      // Chave única por link
       const cacheKey = `news:${newLink}`;
 
-      // Verifica se já foi processado
-      const cached = await redis.get(cacheKey);
-      if (cached) continue; // Pula se já existe no cache
+      const cached = redis ? await redis.get(cacheKey) : null;
+      if (cached) continue;
 
       const newData = (await getLinkPreview(newLink, {
         followRedirects: "follow",
@@ -60,8 +58,9 @@ export async function createNewsService(
 
       await createNewsRepository(newsObj);
 
-      // Marca o link como processado no cache
-      await redis.set(cacheKey, "1", "EX", CACHE_TTL);
+      if (redis) {
+        await redis.set(cacheKey, "1", "EX", CACHE_TTL);
+      }
     }
   } catch (error) {
     if (error instanceof Error) {
