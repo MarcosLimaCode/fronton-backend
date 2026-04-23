@@ -1,10 +1,12 @@
 export const RSS_FEEDS = [
+  // --- POLÍTICA & GERAL (Prioridade Alta) ---
   {
     portal: "G1",
     handle: "g1",
     category: "política",
     url: "https://nitter.net/g1/rss",
     logo: "https://www.google.com/s2/favicons?domain=g1.globo.com&sz=64",
+    limit: 5,
   },
   {
     portal: "CNN Brasil",
@@ -12,20 +14,51 @@ export const RSS_FEEDS = [
     category: "política",
     url: "https://nitter.net/CNNBrasil/rss",
     logo: "https://www.google.com/s2/favicons?domain=cnnbrasil.com.br&sz=64",
+    limit: 5,
   },
+  {
+    portal: "Folha de S.Paulo",
+    handle: "folha",
+    category: "política",
+    url: "https://nitter.net/folha/rss",
+    logo: "https://www.google.com/s2/favicons?domain=folha.uol.com.br&sz=64",
+    limit: 3,
+  },
+
+  // --- ECONOMIA (Foco em Fatos de Mercado) ---
   {
     portal: "Valor Econômico",
     handle: "valoreconomico",
     category: "economia",
     url: "https://nitter.net/valoreconomico/rss",
     logo: "https://www.google.com/s2/favicons?domain=valor.globo.com&sz=64",
+    limit: 3,
   },
+  {
+    portal: "Exame",
+    handle: "exame",
+    category: "economia",
+    url: "https://nitter.net/exame/rss",
+    logo: "https://www.google.com/s2/favicons?domain=exame.com&sz=64",
+    limit: 3,
+  },
+  {
+    portal: "InfoMoney",
+    handle: "infomoney",
+    category: "economia",
+    url: "https://nitter.net/infomoney/rss",
+    logo: "https://www.google.com/s2/favicons?domain=infomoney.com.br&sz=64",
+    limit: 3,
+  },
+
+  // --- TECNOLOGIA ---
   {
     portal: "Canaltech",
     handle: "canaltech",
     category: "tecnologia",
     url: "https://nitter.net/canaltech/rss",
     logo: "https://www.google.com/s2/favicons?domain=canaltech.com.br&sz=64",
+    limit: 3,
   },
   {
     portal: "MacMagazine",
@@ -33,19 +66,100 @@ export const RSS_FEEDS = [
     category: "tecnologia",
     url: "https://nitter.net/MacMagazine/rss",
     logo: "https://www.google.com/s2/favicons?domain=macmagazine.com.br&sz=64",
+    limit: 2,
   },
+  {
+    portal: "Tecnoblog",
+    handle: "tecnoblog",
+    category: "tecnologia",
+    url: "https://nitter.net/tecnoblog/rss",
+    logo: "https://www.google.com/s2/favicons?domain=tecnoblog.net&sz=64",
+    limit: 3,
+  },
+  {
+    portal: "TecMundo",
+    handle: "tecmundo",
+    category: "tecnologia",
+    url: "https://nitter.net/tecmundo/rss",
+    logo: "https://www.google.com/s2/favicons?domain=tecmundo.com.br&sz=64",
+    limit: 3,
+  },
+
+  // --- MÚSICA ---
+  {
+    portal: "Rolling Stone Brasil",
+    handle: "rollingstonebr",
+    category: "música",
+    url: "https://nitter.net/rollingstonebr/rss",
+    logo: "https://www.google.com/s2/favicons?domain=rollingstone.uol.com.br&sz=64",
+    limit: 1,
+  },
+  {
+    portal: "Tenho Mais Discos Que Amigos!",
+    handle: "tmdqa",
+    category: "música",
+    url: "https://nitter.net/tmdqa/rss",
+    logo: "https://www.google.com/s2/favicons?domain=tenhomaisdiscosqueamigos.com&sz=64",
+    limit: 1,
+  },
+  {
+    portal: "Billboard Brasil",
+    handle: "billboardbr",
+    category: "música",
+    url: "https://nitter.net/billboardbr/rss",
+    logo: "https://www.google.com/s2/favicons?domain=billboard.com.br&sz=64",
+    limit: 1,
+  },
+
+  // --- CINEMA ---
   {
     portal: "Omelete",
     handle: "omelete",
     category: "cinema",
     url: "https://nitter.net/omelete/rss",
     logo: "https://www.google.com/s2/favicons?domain=omelete.com.br&sz=64",
+    limit: 1,
   },
   {
-    portal: "Rolling Stone Brasil",
-    handle: "rollingstonebr",
-    category: "música",
-    url: "https://nitter.net/rollingstonebr/rss",
-    logo: "https://www.google.com/s2/favicons?domain=rollingstone.com.br&sz=64",
+    portal: "AdoroCinema",
+    handle: "adorocinema",
+    category: "cinema",
+    url: "https://nitter.net/adorocinema/rss",
+    logo: "https://www.google.com/s2/favicons?domain=adorocinema.com&sz=64",
+    limit: 1,
+  },
+  {
+    portal: "Cinema com Rapadura",
+    handle: "rapadura",
+    category: "cinema",
+    url: "https://nitter.net/rapadura/rss",
+    logo: "https://www.google.com/s2/favicons?domain=cinemacomrapadura.com.br&sz=64",
+    limit: 1,
+  },
+  {
+    portal: "CinePOP",
+    handle: "cinepop",
+    category: "cinema",
+    url: "https://nitter.net/cinepop/rss",
+    logo: "https://www.google.com/s2/favicons?domain=cinepop.com.br&sz=64",
+    limit: 1,
+  },
+
+  // --- ESPORTES ---
+  {
+    portal: "CNN Esportes",
+    handle: "esportescnn",
+    category: "esportes",
+    url: "https://nitter.net/esportescnn/rss",
+    logo: "https://www.google.com/s2/favicons?domain=cnnbrasil.com.br&sz=64",
+    limit: 3,
+  },
+  {
+    portal: "ESPN Brasil",
+    handle: "espn_br",
+    category: "esportes",
+    url: "https://nitter.net/espnbrasil/rss",
+    logo: "https://www.google.com/s2/favicons?domain=espn.com.br&sz=64",
+    limit: 4,
   },
 ];

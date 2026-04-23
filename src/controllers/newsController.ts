@@ -9,6 +9,6 @@ export async function getNews(req: Request, res: Response) {
 
 export async function createNews(req: Request, res: Response) {
   const result = await refreshNewsService();
-  res.status(200).send(result);
+  res.status(200).send("Notícias atualizadas com sucesso!");
   return result;
 }

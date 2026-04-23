@@ -7,3 +7,17 @@ export type CreateNewsData = {
   link: string;
   publishedAt: Date;
 };
+
+export type Preview = {
+  url: string;
+  title: string;
+  siteName: string;
+  description?: string;
+  author: string | undefined;
+  mediaType: string;
+  contentType: string;
+  images: string[];
+  videos: any[];
+  favicons: string[];
+  charset: string;
+};
