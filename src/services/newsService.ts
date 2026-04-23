@@ -8,7 +8,12 @@ import {
 import { CreateNewsData, Preview } from "../protocols/newsProtocol.js";
 import { extractOriginalLink } from "../utils/extractInfo.js";
 
-const parser = new Parser();
+const parser = new Parser({
+  headers: {
+    "User-Agent":
+      "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+  },
+});
 
 export async function createNewsService(
   source: {
@@ -49,6 +54,8 @@ export async function createNewsService(
       };
 
       await createNewsRepository(newsObj);
+      await new Promise((resolve) => setTimeout(resolve, 2000));
+
     }
   } catch (error) {
     if (error instanceof Error) {
