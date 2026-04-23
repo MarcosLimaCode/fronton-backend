@@ -3,7 +3,7 @@ import { getNewsService, refreshNewsService } from "../services/newsService.js";
 
 export async function getNews(req: Request, res: Response) {
   const result = await getNewsService();
-  res.status(200).send(result);
+  res.status(200);
   return result;
 }
 
