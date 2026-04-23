@@ -3,6 +3,10 @@ import { Router } from "express";
 
 const router = Router();
 
+router.get("/health", (req, res) => {
+  res.send("Ok!");
+});
+
 router.get("/news", getNews);
 router.get("/", getNews);
 router.get("/refresh", createNews);
