@@ -21,8 +21,18 @@ export async function createNewsRepository(data: CreateNewsData) {
 
 export async function getNewsRepository() {
   const fallbackNews = await prisma.news.findMany({
+    where: {
+      NOT: { category: "conteudoSensivel" },
+    },
     orderBy: { publishedAt: "desc" },
     take: 100,
   });
   return fallbackNews;
+}
+
+export async function findLinksByPortalRepository(portal: string) {
+  return prisma.news.findMany({
+    where: { portal },
+    select: { link: true },
+  });
 }

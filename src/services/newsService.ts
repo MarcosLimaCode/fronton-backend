@@ -4,6 +4,7 @@ import Parser from "rss-parser";
 import { RSS_FEEDS } from "../config/rssFeeds.js";
 import {
   createNewsRepository,
+  findLinksByPortalRepository,
   getNewsRepository,
 } from "../repositories/newsRepository.js";
 import { CreateNewsData } from "../protocols/newsProtocol.js";
@@ -19,9 +20,6 @@ const parser = new Parser({
   },
 });
 
-const PLACEHOLDER =
-  "https://placehold.co/600x400/282828/585858?text=Sem+Imagem";
-
 export async function createNewsService(
   source: {
     portal: string;
@@ -35,6 +33,8 @@ export async function createNewsService(
   try {
     const feed = await parser.parseURL(source.url);
     console.log(`[RSS OK] ${source.portal} - ${feed.items.length} itens`);
+    const existingLinks = await findLinksByPortalRepository(source.portal);
+    const existingSet = new Set(existingLinks.map((n) => n.link));
 
     for (const item of feed.items.slice(0, maxNews)) {
       const newLink = item.link || extractOriginalLink(item.content || "");
@@ -43,9 +43,8 @@ export async function createNewsService(
         item["content:encoded"] || item.content || ""
       );
 
-      if (source.portal === "MacMagazine") {
-        console.log(item);
-      }
+      if (!imageUrl || !item.title) continue;
+      if (existingSet.has(newLink)) continue;
 
       const sensitive = isSensitiveContent(
         item.title || "",
@@ -59,7 +58,7 @@ export async function createNewsService(
         title: item.title || "",
         portal: source.portal,
         logo: source.logo,
-        imageUrl: imageUrl || PLACEHOLDER,
+        imageUrl: imageUrl,
         content: "",
         link: newLink,
         category,
