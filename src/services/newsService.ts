@@ -22,6 +22,7 @@ const parser = new Parser({
 
 export async function createNewsService(
   source: {
+    placeholder: any;
     portal: string;
     handle: string;
     category: string;
@@ -39,9 +40,12 @@ export async function createNewsService(
     for (const item of feed.items.slice(0, maxNews)) {
       const newLink = item.link || extractOriginalLink(item.content || "");
       if (!newLink) continue;
-      const imageUrl = extractImageFromContent(
+      let imageUrl = extractImageFromContent(
         item["content:encoded"] || item.content || ""
       );
+      if (source.portal === "CNN Brasil") {
+        imageUrl = source.placeholder;
+      }
 
       if (!imageUrl || !item.title) continue;
       if (existingSet.has(newLink)) continue;

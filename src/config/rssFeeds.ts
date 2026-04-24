@@ -7,6 +7,7 @@ export const RSS_FEEDS = [
     url: "https://g1.globo.com/rss/g1",
     logo: "https://www.google.com/s2/favicons?domain=g1.globo.com&sz=64",
     limit: 5,
+    placeholder: "",
   },
   {
     portal: "CNN Brasil",
@@ -15,6 +16,8 @@ export const RSS_FEEDS = [
     url: "https://www.cnnbrasil.com.br/feed/",
     logo: "https://www.google.com/s2/favicons?domain=cnnbrasil.com.br&sz=64",
     limit: 5,
+    placeholder:
+      "https://admin.cnnbrasil.com.br/wp-content/themes/master-theme/assets/img/fallbackImage.jpg?w=419&h=249&crop=1",
   },
 
   // --- ECONOMIA ---
@@ -25,6 +28,7 @@ export const RSS_FEEDS = [
     url: "https://www.meioemensagem.com.br/feed/",
     logo: "https://www.google.com/s2/favicons?domain=meioemensagem.com.br&sz=64",
     limit: 3,
+    placeholder: "",
   },
   {
     portal: "InfoMoney",
@@ -33,6 +37,7 @@ export const RSS_FEEDS = [
     url: "https://www.infomoney.com.br/feed/",
     logo: "https://www.google.com/s2/favicons?domain=infomoney.com.br&sz=64",
     limit: 3,
+    placeholder: "",
   },
 
   // --- TECNOLOGIA ---
@@ -43,6 +48,7 @@ export const RSS_FEEDS = [
     url: "https://canaltech.com.br/rss/",
     logo: "https://www.google.com/s2/favicons?domain=canaltech.com.br&sz=64",
     limit: 3,
+    placeholder: "",
   },
   {
     portal: "Tecnoblog",
@@ -51,6 +57,7 @@ export const RSS_FEEDS = [
     url: "https://tecnoblog.net/feed/",
     logo: "https://www.google.com/s2/favicons?domain=tecnoblog.net&sz=64",
     limit: 3,
+    placeholder: "",
   },
 
   // --- MÚSICA ---
@@ -61,6 +68,7 @@ export const RSS_FEEDS = [
     url: "https://rollingstone.com.br/feed/",
     logo: "https://www.google.com/s2/favicons?domain=rollingstone.uol.com.br&sz=64",
     limit: 3,
+    placeholder: "",
   },
   {
     portal: "Tenho Mais Discos Que Amigos!",
@@ -69,6 +77,7 @@ export const RSS_FEEDS = [
     url: "https://www.tenhomaisdiscosqueamigos.com/feed/",
     logo: "https://www.google.com/s2/favicons?domain=tenhomaisdiscosqueamigos.com&sz=64",
     limit: 3,
+    placeholder: "",
   },
 
   // --- CINEMA ---
@@ -79,6 +88,7 @@ export const RSS_FEEDS = [
     url: "https://www.b9.com.br/feed/",
     logo: "https://www.google.com/s2/favicons?domain=b9.com.br&sz=64",
     limit: 3,
+    placeholder: "",
   },
   {
     portal: "CinePOP",
@@ -87,5 +97,6 @@ export const RSS_FEEDS = [
     url: "https://cinepop.com.br/feed/",
     logo: "https://www.google.com/s2/favicons?domain=cinepop.com.br&sz=64",
     limit: 3,
+    placeholder: "",
   },
 ];
