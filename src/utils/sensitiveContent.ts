@@ -27,7 +27,7 @@ const SENSITIVE_WORDS = [
   "bomba",
 ];
 
-export function isSensitiveContent(title: string, content: string): boolean {
-  const text = `${title} ${content}`.toLowerCase();
+export function isSensitiveContent(title: string): boolean {
+  const text = `${title} `.toLowerCase();
   return SENSITIVE_WORDS.some((word) => text.includes(word));
 }

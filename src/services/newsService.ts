@@ -43,6 +43,15 @@ export async function createNewsService(
       let imageUrl = extractImageFromContent(
         item["content:encoded"] || item.content || ""
       );
+
+      if (source.portal === "G1" && newLink.includes("ao-vivo")) {
+        continue;
+      }
+
+      if (source.portal === "G1" && newLink.includes("/videos")) {
+        continue;
+      }
+
       if (source.portal === "CNN Brasil") {
         imageUrl = source.placeholder;
       }
@@ -50,10 +59,7 @@ export async function createNewsService(
       if (!imageUrl || !item.title) continue;
       if (existingSet.has(newLink)) continue;
 
-      const sensitive = isSensitiveContent(
-        item.title || "",
-        item.contentSnippet || ""
-      );
+      const sensitive = isSensitiveContent(item.title || "");
       const category = sensitive
         ? "conteudoSensivel"
         : resolveCategory(item.categories || []);
