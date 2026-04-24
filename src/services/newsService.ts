@@ -61,7 +61,7 @@ export async function createNewsService(
         imageUrl: imageUrl,
         content: "",
         link: newLink,
-        category,
+        category: category || "Not Found",
         publishedAt: new Date(item.isoDate ?? item.pubDate ?? Date.now()),
       };
 
