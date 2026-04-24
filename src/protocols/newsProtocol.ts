@@ -1,10 +1,11 @@
 export type CreateNewsData = {
   title: string;
   portal: string;
-  logo: string | null;
-  imageUrl: string | null;
+  logo?: string;
+  imageUrl?: string;
   content: string;
   link: string;
+  category?: string | null;
   publishedAt: Date;
 };
 

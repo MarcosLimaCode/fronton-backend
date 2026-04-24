@@ -12,6 +12,7 @@ export async function createNewsRepository(data: CreateNewsData) {
       imageUrl: data.imageUrl,
       content: data.content,
       link: data.link,
+      category: data.category,
       publishedAt: new Date(data.publishedAt),
     },
   });

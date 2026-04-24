@@ -22,11 +22,14 @@ model User {
 
 model Preference {
   id               Int      @id @default(autoincrement())
-  politics         Boolean  @default(true)
-  sensitiveContent Boolean  @default(false)
-  popCulture       Boolean  @default(true)
-  football         Boolean  @default(true)
-  economy          Boolean  @default(true)
+  politica         Boolean  @default(true)
+  conteudoSensivel Boolean  @default(false)
+  futebol          Boolean  @default(true)
+  economia         Boolean  @default(true)
+  tecnologia       Boolean  @default(true)
+  musica           Boolean  @default(true)
+  cinema           Boolean  @default(true)
+  pop              Boolean  @default(true)
   updatedAt        DateTime @updatedAt
 
   userId Int  @unique
@@ -43,6 +46,7 @@ model News {
   imageUrl    String?
   content     String
   link        String   @unique
+  category    String?
   publishedAt DateTime
   createdAt   DateTime @default(now())
 

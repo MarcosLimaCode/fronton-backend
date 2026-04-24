@@ -19,11 +19,11 @@ export const RSS_FEEDS = [
 
   // --- ECONOMIA ---
   {
-    portal: "Exame",
-    handle: "exame",
+    portal: "Meio & Mensagem",
+    handle: "meioemensagem",
     category: "economia",
-    url: "https://exame.com/feed/",
-    logo: "https://www.google.com/s2/favicons?domain=exame.com&sz=64",
+    url: "https://www.meioemensagem.com.br/feed/",
+    logo: "https://www.google.com/s2/favicons?domain=meioemensagem.com.br&sz=64",
     limit: 3,
   },
   {
@@ -45,14 +45,6 @@ export const RSS_FEEDS = [
     limit: 3,
   },
   {
-    portal: "MacMagazine",
-    handle: "MacMagazine",
-    category: "tecnologia",
-    url: "https://macmagazine.com.br/feed/",
-    logo: "https://www.google.com/s2/favicons?domain=macmagazine.com.br&sz=64",
-    limit: 2,
-  },
-  {
     portal: "Tecnoblog",
     handle: "tecnoblog",
     category: "tecnologia",
@@ -68,7 +60,7 @@ export const RSS_FEEDS = [
     category: "música",
     url: "https://rollingstone.com.br/feed/",
     logo: "https://www.google.com/s2/favicons?domain=rollingstone.uol.com.br&sz=64",
-    limit: 1,
+    limit: 3,
   },
   {
     portal: "Tenho Mais Discos Que Amigos!",
@@ -76,17 +68,17 @@ export const RSS_FEEDS = [
     category: "música",
     url: "https://www.tenhomaisdiscosqueamigos.com/feed/",
     logo: "https://www.google.com/s2/favicons?domain=tenhomaisdiscosqueamigos.com&sz=64",
-    limit: 1,
+    limit: 3,
   },
 
   // --- CINEMA ---
   {
-    portal: "Cinema com Rapadura",
-    handle: "rapadura",
-    category: "cinema",
-    url: "https://cinemacomrapadura.com.br/feed/",
-    logo: "https://www.google.com/s2/favicons?domain=cinemacomrapadura.com.br&sz=64",
-    limit: 1,
+    portal: "B9",
+    handle: "b9",
+    category: "música",
+    url: "https://www.b9.com.br/feed/",
+    logo: "https://www.google.com/s2/favicons?domain=b9.com.br&sz=64",
+    limit: 3,
   },
   {
     portal: "CinePOP",
@@ -94,6 +86,6 @@ export const RSS_FEEDS = [
     category: "cinema",
     url: "https://cinepop.com.br/feed/",
     logo: "https://www.google.com/s2/favicons?domain=cinepop.com.br&sz=64",
-    limit: 1,
+    limit: 3,
   },
 ];

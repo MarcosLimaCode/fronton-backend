@@ -1,11 +1,12 @@
-import { getLinkPreview } from "link-preview-js";
+import { isSensitiveContent } from "../utils/sensitiveContent.js";
+import { resolveCategory } from "../utils/extractInfo.js";
 import Parser from "rss-parser";
 import { RSS_FEEDS } from "../config/rssFeeds.js";
 import {
   createNewsRepository,
   getNewsRepository,
 } from "../repositories/newsRepository.js";
-import { CreateNewsData, Preview } from "../protocols/newsProtocol.js";
+import { CreateNewsData } from "../protocols/newsProtocol.js";
 import {
   extractImageFromContent,
   extractOriginalLink,
@@ -17,6 +18,9 @@ const parser = new Parser({
       "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
   },
 });
+
+const PLACEHOLDER =
+  "https://placehold.co/600x400/282828/585858?text=Sem+Imagem";
 
 export async function createNewsService(
   source: {
@@ -35,19 +39,30 @@ export async function createNewsService(
     for (const item of feed.items.slice(0, maxNews)) {
       const newLink = item.link || extractOriginalLink(item.content || "");
       if (!newLink) continue;
-
       const imageUrl = extractImageFromContent(
         item["content:encoded"] || item.content || ""
       );
-      if (!imageUrl) continue; // pula se não tiver imagem no RSS
+
+      if (source.portal === "MacMagazine") {
+        console.log(item);
+      }
+
+      const sensitive = isSensitiveContent(
+        item.title || "",
+        item.contentSnippet || ""
+      );
+      const category = sensitive
+        ? "conteudoSensivel"
+        : resolveCategory(item.categories || []);
 
       const newsObj: CreateNewsData = {
         title: item.title || "",
         portal: source.portal,
         logo: source.logo,
-        imageUrl,
+        imageUrl: imageUrl || PLACEHOLDER,
         content: "",
         link: newLink,
+        category,
         publishedAt: new Date(item.isoDate ?? item.pubDate ?? Date.now()),
       };
 

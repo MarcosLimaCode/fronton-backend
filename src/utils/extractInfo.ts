@@ -26,3 +26,69 @@ export function formatPubDate(pubDate: string): string {
   const minutes = String(date.getMinutes()).padStart(2, "0");
   return `${day} de ${month} às ${hours}:${minutes}`;
 }
+
+const CATEGORY_MAP: Record<string, string> = {
+  // politica
+  política: "politica",
+  politica: "politica",
+  internacional: "politica",
+  brasil: "politica",
+
+  // economia
+  economia: "economia",
+  finanças: "economia",
+  financas: "economia",
+  negócios: "economia",
+  negocios: "economia",
+  consumo: "economia",
+  mercados: "economia",
+  marketing: "economia",
+  mídia: "economia",
+  midia: "economia",
+
+  // tecnologia
+  tecnologia: "tecnologia",
+  "sistemas operacionais": "tecnologia",
+  periféricos: "tecnologia",
+  perifericos: "tecnologia",
+  tablets: "tecnologia",
+  internet: "tecnologia",
+  ciência: "tecnologia",
+  ciencia: "tecnologia",
+
+  // musica
+  música: "musica",
+  musica: "musica",
+  rock: "musica",
+  rap: "musica",
+  "heavy metal": "musica",
+
+  // cinema
+  cinema: "cinema",
+  séries: "cinema",
+  series: "cinema",
+  "notícias - séries de tv": "cinema",
+
+  // futebol
+  futebol: "futebol",
+  "futebol brasileiro": "futebol",
+  "copa do brasil": "futebol",
+  "cnn esportes": "futebol",
+
+  // pop
+  pop: "pop",
+  cultura: "pop",
+  entretenimento: "pop",
+  celebridades: "pop",
+  listas: "pop",
+  lançamentos: "pop",
+  lancamentos: "pop",
+};
+
+export function resolveCategory(itemCategories: string[]): string | null {
+  for (const cat of itemCategories) {
+    const match = CATEGORY_MAP[cat.toLowerCase()];
+    if (match) return match;
+  }
+  return null;
+}
