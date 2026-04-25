@@ -1,6 +1,11 @@
 const SENSITIVE_WORDS = [
   "acidente",
   "morte",
+  "morrer",
+  "morreram",
+  "morrerá",
+  "morrerão",
+  "morre",
   "morto",
   "morreu",
   "assassinado",
