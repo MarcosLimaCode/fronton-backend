@@ -99,4 +99,15 @@ export const RSS_FEEDS = [
     limit: 3,
     placeholder: "",
   },
+  // --- ESPORTES ---
+  {
+    portal: "Trivela",
+    handle: "trivela",
+    category: "esportes",
+    url: "https://trivela.com.br/feed/",
+    logo: "https://www.google.com/s2/favicons?domain=trivela.com.br&sz=64",
+    limit: 3,
+    placeholder: "",
+  },
 ];
+

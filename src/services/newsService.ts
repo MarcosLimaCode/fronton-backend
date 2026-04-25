@@ -44,6 +44,10 @@ export async function createNewsService(
         item["content:encoded"] || item.content || ""
       );
 
+      if (source.portal === "oGol") {
+        console.log(item);
+      }
+
       if (source.portal === "G1" && newLink.includes("ao-vivo")) {
         continue;
       }
