@@ -59,7 +59,9 @@ export async function createNewsService(
       if (!imageUrl || !item.title) continue;
       if (existingSet.has(newLink)) continue;
 
-      const sensitive = isSensitiveContent(item.title || "");
+      const sensitive = isSensitiveContent(
+        item.title || item.contentSnippet || ""
+      );
       const category = sensitive
         ? "conteudoSensivel"
         : resolveCategory(item.categories || []);

@@ -1,34 +1,46 @@
-import Parser from "rss-parser";
+import natural from "natural";
 
-// Interface para tipar o retorno (opcional, mas boa prática)
-interface JogoRSS {
-  title: string;
-  link: string;
-  pubDate: string;
-  content: string;
-  contentSnippet: string;
+const stemmer = natural.PorterStemmerPt;
+
+const SENSITIVE_STEMS = [
+  "acid",
+  "mort",
+  "mat",
+  "assassin",
+  "crim",
+  "bale",
+  "tir",
+  "trag",
+  "desastr",
+  "vitim",
+  "sequestr",
+  "estupr",
+  "abus",
+  "suicid",
+  "explos",
+  "incendi",
+  "guerr",
+  "bomb",
+  "trafic",
+  "assalt",
+  "atent",
+  "terror",
+  "violen",
+  "delit",
+  "conden",
+  "pres",
+  "pris",
+  "deten",
+  "batid",
+  "esfaque",
+  "atropel",
+  "engavet",
+];
+
+export function isSensitiveContent(title: string): boolean {
+  if (!title) return false;
+  const titleStems = stemmer.tokenizeAndStem(title);
+  return titleStems.some((stem) => SENSITIVE_STEMS.includes(stem));
 }
 
-const parser: Parser<any, JogoRSS> = new Parser();
-
-async function buscarProximosJogos(url: string) {
-  try {
-    const feed = await parser.parseURL(url);
-
-    console.log(`--- ${feed.title} ---`);
-
-    feed.items.forEach((item) => {
-      console.log("-----------------------------------------");
-      console.log(`Jogo: ${item.title}`);
-      console.log(`Link: ${item.link}`);
-      console.log(`Data/Info: ${item.contentSnippet}`);
-      console.log(item);
-    });
-  } catch (error) {
-    console.error("Erro ao buscar o RSS:", error);
-  }
-}
-
-// Execução
-const RSS_OGOL = "https://www.ogol.com.br/rss/proxjogos.php";
-buscarProximosJogos(RSS_OGOL);
+console.log(isSensitiveContent("amor de todos os anjos"));
