@@ -5,6 +5,7 @@ import { RSS_FEEDS } from "../config/rssFeeds.js";
 import {
   createNewsRepository,
   findLinksByPortalRepository,
+  getAllNewsRepository,
   getNewsRepository,
 } from "../repositories/newsRepository.js";
 import { CreateNewsData } from "../protocols/newsProtocol.js";
@@ -102,5 +103,10 @@ export async function refreshNewsService() {
 
 export async function getNewsService() {
   const data = await getNewsRepository();
+  return data;
+}
+
+export async function getAllNewsService() {
+  const data = await getAllNewsRepository();
   return data;
 }

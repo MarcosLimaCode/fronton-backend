@@ -25,6 +25,17 @@ export async function getNewsRepository() {
       NOT: { category: "conteudoSensivel" },
     },
     orderBy: { publishedAt: "desc" },
+    take: 30,
+  });
+  return fallbackNews;
+}
+
+export async function getAllNewsRepository() {
+  const fallbackNews = await prisma.news.findMany({
+    where: {
+      NOT: { category: "conteudoSensivel" },
+    },
+    orderBy: { publishedAt: "desc" },
     take: 100,
   });
   return fallbackNews;
