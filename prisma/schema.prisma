@@ -22,14 +22,8 @@ model User {
 
 model Preference {
   id               Int      @id @default(autoincrement())
-  politica         Boolean  @default(true)
+  categories       String[] 
   conteudoSensivel Boolean  @default(false)
-  futebol          Boolean  @default(true)
-  economia         Boolean  @default(true)
-  tecnologia       Boolean  @default(true)
-  musica           Boolean  @default(true)
-  cinema           Boolean  @default(true)
-  pop              Boolean  @default(true)
   updatedAt        DateTime @updatedAt
 
   userId Int  @unique
