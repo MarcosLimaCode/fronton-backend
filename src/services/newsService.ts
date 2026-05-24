@@ -72,7 +72,7 @@ export async function createNewsService(
         portal: source.portal,
         logo: source.logo,
         imageUrl: imageUrl,
-        content: "",
+        content: item.contentSnippet || "",
         link: newLink,
         category: category || "Not Found",
         publishedAt: new Date(item.isoDate ?? item.pubDate ?? Date.now()),
